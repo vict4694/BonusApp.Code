@@ -7,8 +7,30 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest1
     {
-        Order order; //xd
+        Order order;
+        // 59 init
+        //[testinitialize]
+        //public void initializetest()
+        //{
+        //    order = new order();
+        //    order.addproduct(new product
+        //    {
+        //        name = "mælk",
+        //        value = 10.0
+        //    });
+        //    order.addproduct(new product
+        //    {
+        //        name = "smør",
+        //        value = 15.0
+        //    });
+        //    order.addproduct(new product
+        //    {
+        //        name = "pålæg",
+        //        value = 20.0
+        //    });
+        //}
 
+        // 61
         [TestInitialize]
         public void InitializeTest()
         {
@@ -16,19 +38,26 @@ namespace UnitTestProject1
             order.AddProduct(new Product
             {
                 Name = "Mælk",
-                Value = 10.0
+                Value = 10.0,
+                AvailableFrom = new DateTime(2018, 3, 1),
+                AvailableTo = new DateTime(2018, 3, 5)
             });
             order.AddProduct(new Product
             {
                 Name = "Smør",
-                Value = 15.0
+                Value = 15.0,
+                AvailableFrom = new DateTime(2018, 3, 3),
+                AvailableTo = new DateTime(2018, 3, 4)
             });
             order.AddProduct(new Product
             {
                 Name = "Pålæg",
-                Value = 20.0
+                Value = 20.0,
+                AvailableFrom = new DateTime(2018, 3, 4),
+                AvailableTo = new DateTime(2018, 3, 7)
             });
         }
+
         [TestMethod]
         public void TenPercent_Test()
         {
@@ -87,11 +116,20 @@ namespace UnitTestProject1
 
             Assert.AreEqual(4.5, order.GetBonus());
 
-            order.Bonus = amount => amount > 5.0 ? 2.0 : 0.0; // <- Change to lambda expression
+            order.Bonus = amount => amount > 5.0 ? 2.0 : 0.0; // <- Change to lambda expressionx
             Assert.AreEqual(2.0, order.GetBonus());
         }
 
-        
+        // ex61
+        [TestMethod]
+        public void GetValueOfProductsByDate_Test()
+        {
+            Assert.AreEqual(0.0, order.GetValueOfProducts(new DateTime(2018, 2, 28)));
+            Assert.AreEqual(10.0, order.GetValueOfProducts(new DateTime(2018, 3, 2)));
+            Assert.AreEqual(20.0, order.GetValueOfProducts(new DateTime(2018, 3, 3)));
+            Assert.AreEqual(45.0, order.GetValueOfProducts(new DateTime(2018, 3, 4)));
+        }
+
 
     }
 

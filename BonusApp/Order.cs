@@ -18,14 +18,26 @@ namespace BonusApp
         }
         public double GetValueOfProducts()
         {
-            double valueOfProducts = 0.0;
+            // gammel kode
+            //double valueOfProducts = 0.0;
 
-            foreach (Product p in _products)
-            {
-                valueOfProducts += p.Value;
-            }
+            //foreach (Product p in _products)
+            //{
+            //    valueOfProducts += p.Value;
+            //}
 
-            return valueOfProducts;
+            //return valueOfProducts;
+
+
+            return _products.Sum(x => x.Value);
+        }
+        public double GetValueOfProducts(DateTime date)
+        {
+            //var filteredProducts = from  in _products
+            //                         where date(s)
+            //                         select s;
+            //return Where(d => date <= );
+            
         }
         public double GetBonus()
         {
